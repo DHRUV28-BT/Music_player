@@ -1,0 +1,630 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  font-family: Arial, sans-serif;
+
+  background:
+    radial-gradient(circle at top left, #314158, transparent 40%),
+    linear-gradient(135deg, #080c14, #172235);
+
+  color: #ffffff;
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+.player {
+  width: 460px;
+  max-width: 100%;
+
+  padding: 25px;
+
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(20px);
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+.header p {
+  margin-top: 4px;
+
+  color: #aab4c4;
+
+  font-size: 13px;
+}
+
+.refresh-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg);
+
+  background: #ffffff;
+
+  color: #172235;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  margin-bottom: 20px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.search-box i {
+  color: #aab4c4;
+}
+
+.search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #8c98aa;
+}
+
+.search-box button {
+  border: none;
+
+  padding: 8px 13px;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #172235;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.search-box button:hover {
+  opacity: 0.85;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 20px;
+
+  color: #c5cedb;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+  display: none;
+
+  padding: 12px;
+
+  margin-bottom: 15px;
+
+  border-radius: 10px;
+
+  background: rgba(255, 70, 70, 0.15);
+
+  color: #ff9a9a;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+/* =========================
+   COVER
+========================= */
+
+.now-playing {
+  text-align: center;
+}
+
+.cover-container {
+  position: relative;
+
+  width: 280px;
+  height: 280px;
+
+  margin: auto;
+}
+
+#cover {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 22px;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  transition: 0.4s;
+}
+
+#cover:hover {
+  transform: scale(1.02);
+}
+
+.now-playing h2 {
+  margin-top: 20px;
+
+  font-size: 21px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.now-playing h4 {
+  margin-top: 7px;
+
+  color: #9faabd;
+
+  font-weight: normal;
+}
+
+/* =========================
+   PLAYING ANIMATION
+========================= */
+
+.playing-animation {
+  position: absolute;
+
+  bottom: 15px;
+  left: 15px;
+
+  display: flex;
+
+  align-items: end;
+
+  gap: 3px;
+
+  height: 25px;
+
+  padding: 5px 8px;
+
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  opacity: 0;
+
+  transition: 0.3s;
+}
+
+.playing-animation.active {
+  opacity: 1;
+}
+
+.playing-animation span {
+  width: 3px;
+
+  height: 8px;
+
+  background: white;
+
+  border-radius: 5px;
+
+  animation: musicBars 0.8s infinite alternate;
+}
+
+.playing-animation span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.playing-animation span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.playing-animation span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes musicBars {
+  from {
+    height: 5px;
+  }
+
+  to {
+    height: 18px;
+  }
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-container {
+  margin-top: 25px;
+}
+
+#progress {
+  width: 100%;
+
+  cursor: pointer;
+}
+
+.time {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 5px;
+
+  color: #9faabd;
+
+  font-size: 12px;
+}
+
+/* =========================
+   RANGE
+========================= */
+
+input[type="range"] {
+  appearance: none;
+
+  height: 5px;
+
+  border-radius: 10px;
+
+  background: #455267;
+
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  cursor: pointer;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 25px;
+
+  margin: 22px 0;
+}
+
+.controls button {
+  width: 48px;
+  height: 48px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.controls button:hover {
+  transform: scale(1.08);
+
+  background: white;
+
+  color: #172235;
+}
+
+.controls .play-btn {
+  width: 65px;
+  height: 65px;
+
+  background: white;
+
+  color: #172235;
+
+  font-size: 21px;
+}
+
+.controls .play-btn:hover {
+  transform: scale(1.1);
+}
+
+/* =========================
+   VOLUME
+========================= */
+
+.volume-container {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+.volume-container i {
+  width: 20px;
+
+  color: #c6cfdb;
+}
+
+.volume-container input {
+  flex: 1;
+}
+
+/* =========================
+   PLAYLIST HEADER
+========================= */
+
+.playlist-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.playlist-header h3 {
+  font-size: 16px;
+}
+
+.playlist-header h3 i {
+  margin-right: 6px;
+}
+
+.playlist-header span {
+  color: #9faabd;
+
+  font-size: 12px;
+}
+
+/* =========================
+   PLAYLIST
+========================= */
+
+#playlist {
+  max-height: 280px;
+
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+#playlist::-webkit-scrollbar {
+  width: 5px;
+}
+
+#playlist::-webkit-scrollbar-thumb {
+  background: #536176;
+
+  border-radius: 10px;
+}
+
+/* =========================
+   SONG
+========================= */
+
+.song {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px;
+
+  margin-bottom: 7px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  border: 1px solid transparent;
+}
+
+.song:hover {
+  background: rgba(255, 255, 255, 0.08);
+
+  transform: translateX(3px);
+}
+
+.song.active {
+  background: rgba(255, 255, 255, 0.13);
+
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.song img {
+  width: 48px;
+  height: 48px;
+
+  object-fit: cover;
+
+  border-radius: 9px;
+}
+
+.song-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.song-info strong {
+  display: block;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 14px;
+}
+
+.song-info span {
+  display: block;
+
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: #929eaf;
+
+  font-size: 12px;
+}
+
+.song-duration {
+  color: #929eaf;
+
+  font-size: 11px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+  body {
+    padding: 10px;
+
+    align-items: flex-start;
+
+    padding-top: 20px;
+  }
+
+  .player {
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .cover-container {
+    width: min(280px, 75vw);
+
+    height: min(280px, 75vw);
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .search-box {
+    padding: 8px;
+  }
+
+  .search-box button {
+    padding: 8px 10px;
+  }
+
+  .controls {
+    gap: 18px;
+  }
+}

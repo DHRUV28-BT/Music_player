@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="player">
+      <div class="header">
+        <div>
+          <h1>Music Player</h1>
+          <p>Discover royalty-free music</p>
+        </div>
+
+        <button id="refreshBtn" class="refresh-btn">
+          <i class="fas fa-rotate"></i>
+        </button>
+      </div>
+
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search romantic music..."
+        />
+
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div id="loading" class="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Loading music...</span>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+
+      <div class="now-playing">
+        <div class="cover-container">
+          <img id="cover" src="https://picsum.photos/500" alt="Album Cover" />
+
+          <div id="playingAnimation" class="playing-animation">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <h2 id="title">Loading...</h2>
+
+        <h4 id="artist">Please wait</h4>
+      </div>
+
+      <audio id="audio"></audio>
+
+      <div class="progress-container">
+        <input type="range" id="progress" min="0" max="100" value="0" />
+
+        <div class="time">
+          <span id="currentTime"> 0:00 </span>
+
+          <span id="duration"> 0:00 </span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="prev" title="Previous">
+          <i class="fas fa-backward"></i>
+        </button>
+
+        <button id="play" class="play-btn" title="Play">
+          <i class="fas fa-play"></i>
+        </button>
+
+        <button id="next" title="Next">
+          <i class="fas fa-forward"></i>
+        </button>
+      </div>
+
+      <div class="volume-container">
+        <i id="volumeIcon" class="fas fa-volume-high"></i>
+
+        <input type="range" min="0" max="1" step="0.01" value="1" id="volume" />
+      </div>
+
+      <div class="playlist-header">
+        <h3>
+          <i class="fas fa-list"></i>
+          Playlist
+        </h3>
+
+        <span id="songCount"> 0 songs </span>
+      </div>
+
+      <div id="playlist"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
